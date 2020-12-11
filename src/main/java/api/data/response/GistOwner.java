@@ -1,8 +1,9 @@
-package api.data;
+package api.data.response;
 
+import api.data.GistData;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class GistOwner {
+public class GistOwner implements GistData {
     private String login;
     private int id;
     private String nodeId;

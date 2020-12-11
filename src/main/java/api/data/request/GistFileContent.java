@@ -1,4 +1,4 @@
-package api.payload.post;
+package api.data.request;
 
 public class GistFileContent {
     private String content;

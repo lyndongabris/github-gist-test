@@ -1,18 +1,21 @@
 package api.payload;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import exception.GistTestRuntimeException;
+import api.data.GistData;
 import io.restassured.http.ContentType;
 
 public abstract class JsonApiPayload extends AbstractApiPayload {
+    GistData data;
+
+    protected JsonApiPayload(GistData data) {
+        this.data = data;
+    }
+
     @Override
     public String getPayloadString() {
-        try {
-            return new ObjectMapper().writeValueAsString(this);
-        } catch (JsonProcessingException e) {
-            throw new GistTestRuntimeException("Failed to convert object to json", e);
+        if (data != null) {
+            return data.toJson();
         }
+        return "";
     }
 
 

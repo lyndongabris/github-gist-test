@@ -1,20 +1,22 @@
-package api.payload.post;
+package api.data.request;
 
-import api.payload.JsonApiPayload;
+import api.data.GistData;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import util.FileUtil;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
-public class GistPostPayload extends JsonApiPayload {
-    private static final Logger LOG = LoggerFactory.getLogger(GistPostPayload.class);
+public class GistWriteData implements GistData {
+    private static final Logger LOG = LoggerFactory.getLogger(GistWriteData.class);
     private String description;
     private boolean isPublic;
     private Map<String, GistFileContent> files;
 
-    public GistPostPayload(String description, boolean isPublic, Map<String, GistFileContent> files) {
+    public GistWriteData(String description, boolean isPublic, Map<String, GistFileContent> files) {
         this.description = description;
         this.isPublic = isPublic;
         this.files = files;
@@ -53,13 +55,20 @@ public class GistPostPayload extends JsonApiPayload {
             return this;
         }
 
+        public Builder withFile(File file) {
+            String fileContents = FileUtil.fileToString(file);
+            String fileName =  file.getName();
+            files.put(fileName, new GistFileContent(fileContents));
+            return this;
+        }
+
         public Builder withFile(String fileName, String content) {
             files.put(fileName, new GistFileContent(content));
             return this;
         }
 
-        public GistPostPayload build() {
-            return new GistPostPayload(description, isPublic, files);
+        public GistWriteData build() {
+            return new GistWriteData(description, isPublic, files);
         }
     }
 }
