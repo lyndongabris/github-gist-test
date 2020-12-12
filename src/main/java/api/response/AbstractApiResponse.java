@@ -1,6 +1,7 @@
 package api.response;
 
 import api.data.GistData;
+import api.data.GistDataList;
 import api.data.response.GistResponseData;
 import api.endpoint.ApiEndpoint;
 import api.response.raw.RawApiResponse;
@@ -44,9 +45,9 @@ public abstract class AbstractApiResponse<Data extends GistResponseData> impleme
     }
 
     @Override
-    public List<GistResponseData> getDataObject() {
+    public GistDataList getDataObject() {
         checkSuccess();
-        return GistData.fromJson(getStringResponse(), GistResponseData.class);
+        return new GistDataList(GistData.fromJson(getStringResponse(), GistResponseData.class));
     }
 
     @Override

@@ -1,19 +1,21 @@
 package api.data;
 
+import api.data.response.GistResponseData;
+
 import java.util.List;
 
-public class GistDataList<Data extends GistData> implements GistData {
-    List<Data> gists;
+public class GistDataList implements GistData {
+    List<GistResponseData> gists;
 
-    public GistDataList(List<Data> gists) {
+    public GistDataList(List<GistResponseData> gists) {
         this.gists = gists;
     }
 
-    public List<Data> getGists() {
+    public List<GistResponseData> getGists() {
         return gists;
     }
 
-    public void setGists(List<Data> gists) {
+    public void setGists(List<GistResponseData> gists) {
         this.gists = gists;
     }
 }

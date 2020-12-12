@@ -1,5 +1,6 @@
 package api.response;
 
+import api.data.GistDataList;
 import api.data.response.GistResponseData;
 import api.endpoint.ApiEndpoint;
 import api.response.raw.RawApiResponse;
@@ -31,7 +32,7 @@ public interface ApiResponse<Data extends GistResponseData> {
 
     String getStringResponse();
 
-    List<GistResponseData> getDataObject();
+    GistDataList getDataObject();
 
     Class<Data> getDataObjectClass();
 
