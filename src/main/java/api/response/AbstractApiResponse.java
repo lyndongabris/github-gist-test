@@ -1,12 +1,16 @@
 package api.response;
 
+import api.data.GistData;
+import api.data.response.GistResponseData;
 import api.endpoint.ApiEndpoint;
 import api.response.raw.RawApiResponse;
 import exception.GistTestRuntimeException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public abstract class AbstractApiResponse implements ApiResponse {
+import java.util.List;
+
+public abstract class AbstractApiResponse<Data extends GistResponseData> implements ApiResponse<Data> {
     private static final Logger LOG = LoggerFactory.getLogger(AbstractApiResponse.class);
     private final ApiEndpoint endpoint;
     private final RawApiResponse response;
@@ -40,6 +44,12 @@ public abstract class AbstractApiResponse implements ApiResponse {
     }
 
     @Override
+    public List<GistResponseData> getDataObject() {
+        checkSuccess();
+        return GistData.fromJson(getStringResponse(), GistResponseData.class);
+    }
+
+    @Override
     public int getStatusCode() {
         LOG.trace("Obtaining the status code of the API response");
         return getRawResponse().getStatusCode();
@@ -63,6 +73,6 @@ public abstract class AbstractApiResponse implements ApiResponse {
 
     @Override
     public ApiResponse checkSuccess() {
-            return checkSuccess(false);
+            return checkSuccess(true);
     }
 }

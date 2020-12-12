@@ -3,6 +3,7 @@ package api.endpoint;
 import api.payload.ApiPayload;
 import api.request.ApiRequest;
 import api.response.ApiResponse;
+import io.restassured.http.ContentType;
 
 import java.net.URI;
 import java.util.Map;

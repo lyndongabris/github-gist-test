@@ -3,7 +3,7 @@ package api.data.response;
 import api.data.GistData;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class GistOwner implements GistData {
+public class GistOwner {
     private String login;
     private int id;
     private String nodeId;

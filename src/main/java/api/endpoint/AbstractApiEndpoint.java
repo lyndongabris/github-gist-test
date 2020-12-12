@@ -1,9 +1,12 @@
 package api.endpoint;
 
+import api.data.response.GistResponseData;
 import api.payload.ApiPayload;
 import api.payload.general.EmptyApiPayload;
 import api.request.ApiRequest;
+import api.request.RestAssuredApiRequest;
 import api.response.ApiResponse;
+import api.response.SimpleApiResponse;
 import api.response.raw.RawApiResponse;
 import io.restassured.http.ContentType;
 import org.slf4j.Logger;
@@ -14,7 +17,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-public abstract class AbstractApiEndpoint<R extends ApiResponse> implements ApiEndpoint<R> {
+public abstract class AbstractApiEndpoint<Response extends ApiResponse> implements ApiEndpoint<Response> {
     private final static Logger LOG = LoggerFactory.getLogger(AbstractApiEndpoint.class);
     private ApiPayload payload;
     private ContentType responseContentType;
@@ -25,13 +28,13 @@ public abstract class AbstractApiEndpoint<R extends ApiResponse> implements ApiE
 
     protected AbstractApiEndpoint() {
         payload = new EmptyApiPayload();
-        responseContentType = ContentType.XML;
+        responseContentType = ContentType.JSON;
         queryParams = new HashMap<>();
         headers = new HashMap<>();
     }
 
     @Override
-    public R request() {
+    public Response request() {
         ApiRequest request = getBaseApiRequest();
         ContentType requestContentType = payload.getContentType();
         LOG.trace("Api response content type is set to {}", responseContentType);
@@ -53,7 +56,7 @@ public abstract class AbstractApiEndpoint<R extends ApiResponse> implements ApiE
             LOG.trace("Response text:\n{}", response.getStringResponse());
         }
 
-        return null;
+        return ApiResponse.toType(new SimpleApiResponse(this, response), getResponseClass());
     }
 
     private ApiRequest addQueryStrings(ApiRequest request) {
@@ -130,5 +133,10 @@ public abstract class AbstractApiEndpoint<R extends ApiResponse> implements ApiE
 
     protected void setResponseContentType(ContentType responseContentType) {
         this.responseContentType = responseContentType;
+    }
+
+    @Override
+    public ApiRequest getBaseApiRequest() {
+        return new RestAssuredApiRequest(this);
     }
 }
