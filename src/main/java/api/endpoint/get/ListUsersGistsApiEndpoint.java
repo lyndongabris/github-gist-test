@@ -1,15 +1,13 @@
 package api.endpoint.get;
 
-import api.response.ApiResponse;
 import api.response.get.GetGistApiResponse;
 import util.StringUtil;
 
 import java.net.URI;
 import java.time.OffsetDateTime;
 
-public class ListUsersGistsApiEndpoint extends AbstractGistGetApiEndpoint{
-    private String endpointUrl = "/users/{}/gists";
-    private static final String SINCE_HEADER = "since";
+public class ListUsersGistsApiEndpoint extends AbstractGistListApiEndpoint {
+    private URI endpointUri;
     private final String username;
 
     public static GetGistApiResponse get(String username) {
@@ -17,9 +15,8 @@ public class ListUsersGistsApiEndpoint extends AbstractGistGetApiEndpoint{
     }
 
     public static GetGistApiResponse getSince(String username, OffsetDateTime dateTime) {
-        String sinceDate = dateTime.toString();
         ListUsersGistsApiEndpoint endpoint = new ListUsersGistsApiEndpoint(username);
-        endpoint.addHeader(SINCE_HEADER, sinceDate);
+        endpoint.addSinceHeader(dateTime);
         return endpoint.request();
     }
 
@@ -29,7 +26,11 @@ public class ListUsersGistsApiEndpoint extends AbstractGistGetApiEndpoint{
 
     @Override
     public URI getEndpointUrl() {
-        String formattedEndpointUrl = StringUtil.format(endpointUrl, username);
-        return URI.create(formattedEndpointUrl);
+        if (endpointUri == null) {
+            String endpointUrl = "/users/{}/gists";
+            String formattedEndpointUrl = StringUtil.format(endpointUrl, username);
+            endpointUri = URI.create(formattedEndpointUrl);
+        }
+        return endpointUri;
     }
 }

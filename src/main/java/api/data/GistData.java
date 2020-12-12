@@ -1,11 +1,8 @@
 package api.data;
 
-import api.data.response.GistFileInfo;
-import api.data.response.deserializer.GistFileInfoDeserializer;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import exception.GistTestRuntimeException;

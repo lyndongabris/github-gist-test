@@ -1,6 +1,5 @@
 package api.response;
 
-import api.data.GistData;
 import api.data.response.GistResponseData;
 import api.endpoint.ApiEndpoint;
 import api.response.raw.RawApiResponse;

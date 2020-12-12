@@ -1,10 +1,10 @@
 package api.payload.post;
 
-import api.data.GistData;
+import api.data.request.GistWriteData;
 import api.payload.JsonApiPayload;
 
 public class GistPostApiPayload extends JsonApiPayload {
-    protected GistPostApiPayload(GistData data) {
+    protected GistPostApiPayload(GistWriteData data) {
         super(data);
     }
 }
