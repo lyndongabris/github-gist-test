@@ -1,6 +1,5 @@
 package com.gist.test.stepdefs.common;
 
-
 import com.gist.test.util.PropertiesUtil;
 import io.cucumber.java.Before;
 
@@ -10,4 +9,9 @@ public class SetupStepDefs {
     public void setup() {
         PropertiesUtil.loadPropertiesFile("user.properties");
     }
+
+//    @After
+//    public void cleanup() {
+//        TestData.get().deleteAllCreatedGists();
+//    }
 }

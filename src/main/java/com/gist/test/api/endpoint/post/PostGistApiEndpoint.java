@@ -6,16 +6,16 @@ import com.gist.test.api.response.post.PostGistApiResponse;
 
 import java.net.URI;
 
-public class CreateGistApiEndpoint extends AbstractPostGistApiEndpoint {
+public class PostGistApiEndpoint extends AbstractPostGistApiEndpoint {
     private final URI endpointUrl = URI.create("/gists");
     private GistWriteData data;
 
     public static PostGistApiResponse create(String token, GistWriteData data) {
-        CreateGistApiEndpoint endpoint = new CreateGistApiEndpoint(token, data);
+        PostGistApiEndpoint endpoint = new PostGistApiEndpoint(token, data);
         return endpoint.request();
     }
 
-    private CreateGistApiEndpoint(String token, GistWriteData data) {
+    private PostGistApiEndpoint(String token, GistWriteData data) {
         this.setPayload(new PostGistApiPayload(data));
         addAuthentication(this, token);
     }

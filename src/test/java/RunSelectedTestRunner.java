@@ -7,7 +7,7 @@ import org.junit.runner.RunWith;
         features = "src/test/resources/features",
         glue = "com.gist.test.stepdefs",
         plugin = {"pretty", "html:target/cucumber", "json:target/cucumber.json"},
-        tags = {"not @wip"}
+        tags = {"not @wip", "@selected"}
 )
-public class TestRunner {
+public class RunSelectedTestRunner {
 }

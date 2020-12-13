@@ -63,7 +63,11 @@ public class GistWriteData implements GistData {
         }
 
         public Builder withFile(String fileName, String content) {
-            files.put(fileName, new GistFileContent(content));
+            if (content == null) {
+                files.put(fileName, null);
+            } else {
+                files.put(fileName, new GistFileContent(content));
+            }
             return this;
         }
 

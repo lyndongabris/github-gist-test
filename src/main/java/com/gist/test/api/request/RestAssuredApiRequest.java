@@ -99,6 +99,7 @@ public class RestAssuredApiRequest extends AbstractApiRequest {
                 break;
             case PATCH:
                 response = request.patch();
+                break;
             default:
                 throw new IllegalArgumentException("Unsupported method " + method);
         }
