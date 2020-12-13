@@ -101,19 +101,13 @@ public class TestData {
     }
 
     public GistResponseData getGist(String gistId) {
-//        Supplier<GetGistApiResponse> getGist = () -> GetSpecificGistApiEndpoint.get(gistId);
         Predicate<GetGistApiResponse> checkSuccess = AbstractApiResponse::isSuccessful;
-//        LOG.info("Attempting to GET GIST with ID '{}' with timeout of '{}' seconds", lastGistId, RETRY_TIME_SECONDS);
-//        GetGistApiResponse response = RetryUtil.retryAction(getGist, checkSuccess, RETRY_TIME_SECONDS, ChronoUnit.SECONDS,
-//                "Could not retrieve GIST within " + RETRY_TIME_SECONDS + "seconds", true);
-//        evidenceData(response.getDataObject(), "GET response data");
-//        return response.getDataObject().getGists().get(0);
 
         return getUntilCondition(gistId, checkSuccess, "Could not retrieve GIST within " + RETRY_TIME_SECONDS + " seconds", RETRY_TIME_SECONDS);
     }
 
     public GistResponseData getUntilCondition(String gistId, Predicate<GetGistApiResponse> condition, String message, long timeoutSeconds) {
-        Supplier<GetGistApiResponse> getGist = () -> GetSpecificGistApiEndpoint.get(gistId);
+        Supplier<GetGistApiResponse> getGist = () -> GetSpecificGistApiEndpoint.get(getToken(), gistId);
         LOG.info("Attempting to GET GIST with ID '{}' with timeout of '{}' seconds", gistId, timeoutSeconds);
         GetGistApiResponse response = RetryUtil.retryAction(getGist, condition, timeoutSeconds, ChronoUnit.SECONDS, message, true);
         evidenceData(response.getDataObject(), "GET response data");

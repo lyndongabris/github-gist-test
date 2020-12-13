@@ -13,13 +13,20 @@ public class GetSpecificGistApiEndpoint extends AbstractGistGetApiEndpoint imple
     private String id;
 
     public static GetGistApiResponse get(String id) {
-        GetSpecificGistApiEndpoint endpoint = new GetSpecificGistApiEndpoint(id);
+        return get(null, id);
+    }
+
+    public static GetGistApiResponse get(String token, String id) {
+        GetSpecificGistApiEndpoint endpoint = new GetSpecificGistApiEndpoint(token, id);
         return endpoint.request();
     }
 
-    private GetSpecificGistApiEndpoint(String id) {
+    private GetSpecificGistApiEndpoint(String token, String id) {
         this.id = id;
-        addAuthentication(this, PropertiesUtil.getSystem("gist.token"));
+        if (token != null) {
+            addAuthentication(this, token);
+        }
+
     }
 
     @Override
