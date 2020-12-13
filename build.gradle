@@ -1,0 +1,83 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        maven {
+            url "http://dl.bintray.com/serenity/maven"
+        }
+        jcenter()
+    }
+    dependencies {
+        classpath("net.serenity-bdd:serenity-gradle-plugin:2.0.59")
+    }
+}
+
+
+group 'github-gist-test'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'maven'
+apply plugin: 'net.serenity-bdd.aggregator'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+    maven {
+        url "http://dl.bintray.com/serenity/maven"
+    }
+}
+
+ext {
+    serenityVersion = "2.2.9"
+    jacksonVersion = "2.9.5"
+    slf4jversion = "1.7.25"
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    compile "net.serenity-bdd:serenity-core:$serenityVersion"
+    compile "net.serenity-bdd:serenity-cucumber5:2.2.5"
+    compile "net.serenity-bdd:serenity-junit:$serenityVersion"
+    compile "net.serenity-bdd:serenity-rest-assured:$serenityVersion"
+    compile "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion"
+    compile "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$jacksonVersion"
+    compile "com.fasterxml.jackson.module:jackson-module-jaxb-annotations:$jacksonVersion"
+    compile "com.fasterxml.jackson.datatype:jackson-datatype-jdk8:$jacksonVersion"
+    compile "ch.qos.logback:logback-classic:1.0.13"
+    compile "org.slf4j:slf4j-api:$slf4jversion"
+}
+
+test {
+    useJUnit {
+        includeCategories 'com.gist.test.unittest.UnitTest'
+    }
+
+    reports {
+        html.enabled = false
+    }
+}
+
+// This has been added to output the logging to the console when executing tasks which utilise it
+class runTestPack extends Test {
+    public runTestPack() {
+        testLogging {
+            showStandardStreams = true
+        }
+    }
+}
+
+// This will allow us to execute the tests with gradle from the command line
+task runTests(type: runTestPack) {
+    useJUnit {
+        include '**/TestRunner.class'
+    }
+}
+
+// Will run any scenario tagged with @selected
+task runSelectedTests(type: runTestPack) {
+    useJUnit {
+        include '**/RunSelectedTestRunner.class'
+    }
+}
