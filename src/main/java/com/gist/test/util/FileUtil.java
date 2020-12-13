@@ -31,7 +31,7 @@ public class FileUtil {
     public static String pathToString(Path path) {
         verifyFile(path.toFile());
         try {
-            return new String (Files.readAllBytes(path), StandardCharsets.UTF_8);
+            return new String(Files.readAllBytes(path), StandardCharsets.UTF_8);
         } catch (IOException e) {
             throw new GistFileException("IO com.gist.test.exception occurred while reading file contents");
         }

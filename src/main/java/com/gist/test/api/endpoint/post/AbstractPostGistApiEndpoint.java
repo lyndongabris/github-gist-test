@@ -6,7 +6,7 @@ import com.gist.test.api.endpoint.AuthenticatedEndpoint;
 import com.gist.test.api.response.post.PostGistApiResponse;
 
 
-public abstract class AbstractPostGistApiEndpoint  extends AbstractApiEndpoint<PostGistApiResponse>  implements AuthenticatedEndpoint {
+public abstract class AbstractPostGistApiEndpoint extends AbstractApiEndpoint<PostGistApiResponse> implements AuthenticatedEndpoint {
     @Override
     public ApiMethod getMethod() {
         return ApiMethod.POST;

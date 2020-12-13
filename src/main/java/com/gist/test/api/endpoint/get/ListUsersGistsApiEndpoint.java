@@ -11,7 +11,7 @@ public class ListUsersGistsApiEndpoint extends AbstractGistListApiEndpoint {
     private final String username;
 
     public static GetGistApiResponse get(String username) {
-        return  new ListUsersGistsApiEndpoint(username).request();
+        return new ListUsersGistsApiEndpoint(username).request();
     }
 
     public static GetGistApiResponse getSince(String username, OffsetDateTime dateTime) {

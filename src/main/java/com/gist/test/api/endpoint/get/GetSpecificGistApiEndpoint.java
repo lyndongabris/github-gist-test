@@ -2,7 +2,6 @@ package com.gist.test.api.endpoint.get;
 
 import com.gist.test.api.endpoint.AuthenticatedEndpoint;
 import com.gist.test.api.response.get.GetGistApiResponse;
-import com.gist.test.util.PropertiesUtil;
 import com.gist.test.util.StringUtil;
 
 import java.net.URI;

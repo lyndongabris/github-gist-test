@@ -3,15 +3,11 @@ package com.gist.test.steps;
 import com.gist.test.api.data.requestdata.GistWriteData;
 import com.gist.test.api.data.responsedata.GistDataList;
 import com.gist.test.api.data.responsedata.GistResponseData;
-import com.gist.test.api.endpoint.get.GetSpecificGistApiEndpoint;
 import com.gist.test.api.response.get.GetGistApiResponse;
-import com.gist.test.exception.GistTestRuntimeException;
 import com.gist.test.testdata.TestData;
-import com.gist.test.util.RetryUtil;
 import net.thucydides.core.annotations.Step;
 import org.junit.Assert;
 
-import java.time.temporal.ChronoUnit;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -29,7 +25,7 @@ public class GistApiSteps {
     private final String myFile2Content = "This file will be deleted";
 
     private void createDefaultGist() {
-        lastCreatedGist =  GistWriteData.builder("Testing Gist Creation API")
+        lastCreatedGist = GistWriteData.builder("Testing Gist Creation API")
                 .withFile("myFile.txt", "This is a test Gist")
                 .build();
     }
@@ -52,13 +48,13 @@ public class GistApiSteps {
 
     @Step
     public void filenameOfReturnedGistMatchesPosted() {
-        Assert.assertEquals("Filename of returned value does not match the original",lastCreatedGist.getFiles().keySet().toArray()[0],
+        Assert.assertEquals("Filename of returned value does not match the original", lastCreatedGist.getFiles().keySet().toArray()[0],
                 cachedGistResponse.getFiles().keySet().toArray()[0]);
     }
 
     @Step
     public void fileContentsOfReturnedGistMatchesPosted() {
-        Assert.assertEquals("File contents of returned value does not match the original",lastCreatedGist.getFiles().entrySet().stream().findFirst().get().getValue().getContent(),
+        Assert.assertEquals("File contents of returned value does not match the original", lastCreatedGist.getFiles().entrySet().stream().findFirst().get().getValue().getContent(),
                 cachedGistResponse.getFiles().entrySet().stream().findFirst().get().getValue().getContent());
     }
 

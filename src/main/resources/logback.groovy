@@ -1,4 +1,3 @@
-
 appender("STDOUT", ConsoleAppender) {
     encoder(PatternLayoutEncoder) {
         pattern = "%d{dd/MM HH:mm:ss.SSS, UTC} %-5level [%thread] %logger{6}: %message%n"

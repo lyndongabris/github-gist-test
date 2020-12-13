@@ -1,10 +1,10 @@
 package com.gist.test.api.data.requestdata;
 
-import com.gist.test.api.data.GistData;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.gist.test.api.data.GistData;
+import com.gist.test.util.FileUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import com.gist.test.util.FileUtil;
 
 import java.io.File;
 import java.util.HashMap;
@@ -57,7 +57,7 @@ public class GistWriteData implements GistData {
 
         public Builder withFile(File file) {
             String fileContents = FileUtil.fileToString(file);
-            String fileName =  file.getName();
+            String fileName = file.getName();
             files.put(fileName, new GistFileContent(fileContents));
             return this;
         }

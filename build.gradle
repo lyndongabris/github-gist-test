@@ -69,15 +69,15 @@ class runTestPack extends Test {
 }
 
 // This will allow us to execute the tests with gradle from the command line
-task runTests(type:runTestPack) {
-    useJUnit{
+task runTests(type: runTestPack) {
+    useJUnit {
         include '**/TestRunner.class'
     }
 }
 
 // Will run any scenario tagged with @selected
-task runSelectedTests(type:runTestPack) {
-    useJUnit{
+task runSelectedTests(type: runTestPack) {
+    useJUnit {
         include '**/RunSelectedTestRunner.class'
     }
 }

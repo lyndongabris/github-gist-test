@@ -1,9 +1,9 @@
 package com.gist.test.api.data.responsedata;
 
-import com.gist.test.api.data.GistData;
-import com.gist.test.api.data.responsedata.deserializer.GistFileInfoDeserializer;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.gist.test.api.data.GistData;
+import com.gist.test.api.data.responsedata.deserializer.GistFileInfoDeserializer;
 
 import java.util.Objects;
 

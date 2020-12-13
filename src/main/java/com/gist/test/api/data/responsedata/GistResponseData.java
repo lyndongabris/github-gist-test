@@ -1,8 +1,8 @@
 package com.gist.test.api.data.responsedata;
 
 
-import com.gist.test.api.data.GistData;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.gist.test.api.data.GistData;
 
 import java.time.OffsetDateTime;
 import java.util.List;
@@ -50,7 +50,7 @@ public class GistResponseData implements GistData {
                             @JsonProperty("owner") GistOwner owner,
                             @JsonProperty("truncated") String truncated,
                             @JsonProperty("forks") List<GistFork> forks,
-                            @JsonProperty("history") List<GistHistory> history                  ){
+                            @JsonProperty("history") List<GistHistory> history) {
         this.url = url;
         this.forksUrl = forksUrl;
         this.commitsUrl = commitsUrl;

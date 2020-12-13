@@ -7,7 +7,7 @@ import java.net.URI;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-public class DeleteGistApiEndpoint extends AbstractDeleteGistApiEndpoint{
+public class DeleteGistApiEndpoint extends AbstractDeleteGistApiEndpoint {
     private URI endpointUrl;
     private String id;
 

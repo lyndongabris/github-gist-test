@@ -14,15 +14,15 @@ public abstract class AbstractApiResponse<Data extends GistResponseData> impleme
     private final ApiEndpoint endpoint;
     private final RawApiResponse response;
 
-        protected AbstractApiResponse(ApiEndpoint endpoint, RawApiResponse response) {
-            this.endpoint = endpoint;
-            this.response = response;
-        }
+    protected AbstractApiResponse(ApiEndpoint endpoint, RawApiResponse response) {
+        this.endpoint = endpoint;
+        this.response = response;
+    }
 
-        protected AbstractApiResponse(ApiResponse response) {
-            this.endpoint = response.getRequest();
-            this.response = response.getRawResponse();
-        }
+    protected AbstractApiResponse(ApiResponse response) {
+        this.endpoint = response.getRequest();
+        this.response = response.getRawResponse();
+    }
 
     @Override
     public ApiEndpoint getRequest() {
@@ -72,6 +72,6 @@ public abstract class AbstractApiResponse<Data extends GistResponseData> impleme
 
     @Override
     public ApiResponse<Data> checkSuccess() {
-            return checkSuccess(true);
+        return checkSuccess(true);
     }
 }

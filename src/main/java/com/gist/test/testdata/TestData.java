@@ -136,7 +136,7 @@ public class TestData {
 
 
     public void deleteAllListsForUser() {
-        GistDataList listData =  ListAuthenticatedUsersGistsApiEndpoint.get(getToken()).getDataObject();
+        GistDataList listData = ListAuthenticatedUsersGistsApiEndpoint.get(getToken()).getDataObject();
         List<String> ids = listData.getGists().stream().map(GistResponseData::getId).collect(Collectors.toList());
         ids.forEach(this::deleteGist);
     }
