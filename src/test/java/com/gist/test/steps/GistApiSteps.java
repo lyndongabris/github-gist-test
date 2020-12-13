@@ -3,6 +3,7 @@ package com.gist.test.steps;
 import com.gist.test.api.data.requestdata.GistWriteData;
 import com.gist.test.api.data.responsedata.GistDataList;
 import com.gist.test.api.data.responsedata.GistResponseData;
+import com.gist.test.api.endpoint.get.GetSpecificGistApiEndpoint;
 import com.gist.test.api.response.get.GetGistApiResponse;
 import com.gist.test.exception.GistTestRuntimeException;
 import com.gist.test.testdata.TestData;
@@ -104,5 +105,15 @@ public class GistApiSteps {
         cachedGistResponse = TestData.get().getUntilCondition(lastGistId, validation, "File size was not reduced for GIST as expected within timeout", 10);
         Assert.assertEquals("File has not been deleted", 1, cachedGistResponse.getFiles().size());
         Assert.assertEquals("File content has not been updated", myFile1UpdatedContent, cachedGistResponse.getFiles().entrySet().stream().findFirst().get().getValue().getContent());
+    }
+
+    @Step
+    public void lastGistIsDeleted() {
+        TestData.get().deleteGist(lastGistId);
+    }
+
+    @Step
+    public void gistIsNoLongerAvailable() {
+        Assert.assertEquals(404, TestData.get().getGistWithoutCheck(lastGistId).getStatusCode());
     }
 }

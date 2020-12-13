@@ -1,4 +1,4 @@
-Feature: Create GIST
+Feature: GIST API
 
 #   Test 1 - Create a new GIST
   Scenario: Description is correct for a created GIST
@@ -25,8 +25,13 @@ Feature: Create GIST
     Then the new GIST is present in the list
 
 #   Test 3 - Update an existing GIST
-  @selected
   Scenario: Created GIST can be updated successfully
     Given a new GIST with two files is POSTed to the GitHub GIST API
     When performing a PATCH to update the created GIST
     Then the update has been completed as expected
+
+#   Test 4 - Delete a GIST
+  Scenario: A GIST can be deleted successfully
+    Given a new GIST is POSTed to the GitHub GIST API
+    When performing a DELETE action on the previously created GIST
+    Then a 404 is returned when performing a GET for the GIST

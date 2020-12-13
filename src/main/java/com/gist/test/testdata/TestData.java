@@ -14,6 +14,7 @@ import com.gist.test.api.response.delete.DeleteGistApiResponse;
 import com.gist.test.api.response.get.GetGistApiResponse;
 import com.gist.test.api.response.patch.PatchGistApiResponse;
 import com.gist.test.api.response.post.PostGistApiResponse;
+import com.gist.test.exception.GistTestRuntimeException;
 import com.gist.test.util.PropertiesUtil;
 import com.gist.test.util.RetryUtil;
 import net.serenitybdd.core.Serenity;
@@ -69,7 +70,11 @@ public class TestData {
     }
 
     private String getToken() {
-        return PropertiesUtil.getSystem("gist.token");
+        String token = PropertiesUtil.getSystem("gist.token");
+        if (token == null || token.isEmpty()) {
+            throw new GistTestRuntimeException("NO GITHUB API TOKEN HAS BEEN DEFINED. Please add this to the user.properties file as gist.token");
+        }
+        return token;
     }
 
     public String createGist(GistWriteData data) {
@@ -98,6 +103,10 @@ public class TestData {
     public GistResponseData createGistAndConfirmCreation(GistWriteData data) {
         createGist(data);
         return getLastGist();
+    }
+
+    public GetGistApiResponse getGistWithoutCheck(String gistId) {
+        return GetSpecificGistApiEndpoint.get(getToken(), gistId);
     }
 
     public GistResponseData getGist(String gistId) {

@@ -74,3 +74,10 @@ task runTests(type:runTestPack) {
         include '**/TestRunner.class'
     }
 }
+
+// Will run any scenario tagged with @selected
+task runSelectedTests(type:runTestPack) {
+    useJUnit{
+        include '**/RunSelectedTestRunner.class'
+    }
+}

@@ -67,4 +67,14 @@ public class CreateGistStepDefs {
     public void theUpdateHasBeenCompletedAsExpected() {
         gistApiSteps.gistUpdatedAsExpected();
     }
+
+    @When("performing a DELETE action on the previously created GIST")
+    public void performingADELETEActionOnThePreviouslyCreatedGIST() {
+        gistApiSteps.lastGistIsDeleted();
+    }
+
+    @Then("a 404 is returned when performing a GET for the GIST")
+    public void aIsReturnedWhenPerformingAGETForTheGIST() {
+        gistApiSteps.gistIsNoLongerAvailable();
+    }
 }

@@ -39,7 +39,7 @@ public class PropertiesUtil {
 
     public static String getSystem(String propertyName) {
         String output = System.getProperty(propertyName);
-        Preconditions.checkNotNull(output, "System property %s is null, please check it has been loaded", propertyName);
+//        Preconditions.checkNotNull(output, "System property %s is null, please check it has been loaded", propertyName);
         return output;
     }
 }
