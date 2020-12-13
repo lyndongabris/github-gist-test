@@ -11,7 +11,7 @@ public class RetryUtil {
 
     public static <O> O retryAction(Supplier<O> action, Predicate<O> validator, long timeout, ChronoUnit timeUnit, String failMessage, boolean throwException) {
         long expiration = System.currentTimeMillis() + Duration.of(timeout, timeUnit).toMillis();
-        boolean isSuccessful = false;
+        boolean isSuccessful;
         O output;
         do {
             output = action.get();
