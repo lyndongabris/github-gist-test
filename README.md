@@ -12,7 +12,7 @@ The automation requires a properties file `user.properties` to be created in the
 require a personal access token to be defined here as `gist.token=TOKEN` where `TOKEN` needs to be replaced with a
 GitHub personal access token with GIST scope.
 
-A Gradle wrapper has been checked into source , and a task has been defined to run all the tests, which can be found as
+A Gradle wrapper has been checked into source control, and a task has been defined to run all the tests, which can be found as
 BDD scenarios in `src/test/resources`
 
 This project uses Gradle to build and execute tests, and requires Java 1.8 with the JAVA_HOME environment variable to
