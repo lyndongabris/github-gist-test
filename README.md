@@ -1,6 +1,6 @@
 # github-gist-test
 
-A test framework designed to test GitHub's GIST service
+A test framework designed to test GitHub's GIST service, this was created for an application for a role which I was successful for.
 
 Author: Lyndon Gabris
 
